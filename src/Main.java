@@ -6,6 +6,9 @@ public class Main {
     public static String simbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_";
 
     public static void validation(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException{
+        if (login == null || password == null || confirmPassword == null) {
+            throw new NullPointerException();
+        }
         char[] a = login.toCharArray();
         char[] b = password.toCharArray();
         for (char d : a) {
@@ -25,6 +28,8 @@ public class Main {
     public static void dataChecking(String login, String password, String confirmPassword) {
         try {
             validation(login, password, confirmPassword);
+        } catch (NullPointerException e) {
+            System.out.println("Одно из полей не заполнено(проверьте поля логин/пароль/повтор пароля).");
         } catch (WrongLoginException e) {
             System.out.println("Неверно введен логин.");
         } catch (WrongPasswordException e) {
